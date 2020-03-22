@@ -1,0 +1,7 @@
+Config:
+    keyPhrase: 'Vibe Check'
+    deathMessageEnabled: true
+    deathMessage: '&7%playerName failed the Vibe Check, F'
+    successMessageEnabled: true
+    successMessage: '&7%playerName u passed the Vibe Check!'
+    successChance: 25
