@@ -24,7 +24,7 @@ public class VibeCheckMain extends JavaPlugin implements Listener{
 			Random rnd = new Random();
 			int chance = rnd.nextInt(100);
 			int succesChance = getConfig().getInt("Config.successChance");
-			String succes = ChatColor.translateAlternateColorCodes('&', "Config.successMessage").replaceFirst("%playerName", e.getPlayer().getDisplayName());
+			String succes = ChatColor.translateAlternateColorCodes('&', getConfig().getString("Config.successMessage").replaceFirst("%playerName", e.getPlayer().getDisplayName()));
 			String failed = ChatColor.translateAlternateColorCodes('&', getConfig().getString("Config.deathMessage").replaceFirst("%playerName", e.getPlayer().getDisplayName()));
 			if(chance<=succesChance) {
 				if(getConfig().getBoolean("Config.successMessageEnabled")) {
