@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class VibeCheckMain extends JavaPlugin implements Listener{
 	public void onEnable() {
@@ -28,11 +29,12 @@ public class VibeCheckMain extends JavaPlugin implements Listener{
 			String failed = ChatColor.translateAlternateColorCodes('&', getConfig().getString("Config.deathMessage").replaceFirst("%playerName", e.getPlayer().getDisplayName()));
 			if(chance<=succesChance) {
 				if(getConfig().getBoolean("Config.successMessageEnabled")) {
-				getServer().broadcastMessage(succes);
+					
+				sendDelayedMessage(succes);
 				}
 			}else {
 				if(getConfig().getBoolean("Config.deathMessageEnabled")) {
-					getServer().broadcastMessage(failed);
+					sendDelayedMessage(failed);
 				}
 				Bukkit.getScheduler().runTask(this, new Runnable(){
 
@@ -45,6 +47,16 @@ public class VibeCheckMain extends JavaPlugin implements Listener{
 				
 			});
 		}}
+	}
+	private void sendDelayedMessage(String message) {
+		new BukkitRunnable() {
+
+			@Override
+			public void run() {
+				getServer().broadcastMessage(message);
+			}
+			
+		}.runTaskLater(this, 2);
 	}
 }
 
